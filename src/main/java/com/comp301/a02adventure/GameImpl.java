@@ -71,12 +71,22 @@ public class GameImpl implements Game {
 
   @Override
   public boolean canMove(Direction direction) {
+    if (this.player.getPosition().getY() == this.map.getHeight() && direction == Direction.NORTH) {
+      return false;
+    }
+    if (this.player.getPosition().getX() == this.map.getWidth() && direction == Direction.EAST) {
+      return false;
+    }
+    if (this.player.getPosition().getX() == 1 && direction == Direction.WEST) {
+      return false;
+    }
+    if (this.player.getPosition().getY() == 1 && direction == Direction.SOUTH) {
+      return false;
+    }
     if (this.map.getCell(
-                this.player.getPosition().getNeighbor(direction).getX(),
-                this.player.getPosition().getNeighbor(direction).getY())
-            != null
-        && this.player.getPosition().getNeighbor(direction).getX() < this.map.getWidth()
-        && this.player.getPosition().getNeighbor(direction).getY() < this.map.getHeight()) {
+            this.player.getPosition().getNeighbor(direction).getX(),
+            this.player.getPosition().getNeighbor(direction).getY())
+        != null) {
       return true;
     }
     return false;

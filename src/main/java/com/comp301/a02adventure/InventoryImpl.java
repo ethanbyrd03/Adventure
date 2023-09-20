@@ -1,7 +1,6 @@
 package com.comp301.a02adventure;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class InventoryImpl implements Inventory {
 
@@ -26,7 +25,8 @@ public class InventoryImpl implements Inventory {
 
   @Override
   public List<Item> getItems() {
-    return this.items;
+    List<Item> c = (List<Item>) this.items.clone();
+    return c;
   }
 
   @Override
@@ -47,8 +47,8 @@ public class InventoryImpl implements Inventory {
   @Override
   public void transferFrom(Inventory other) {
     for (int i = 0; i < other.getNumItems(); i++) {
-      this.items.add(other.getItems().get(i));
-      other.getItems().remove(i);
+      this.addItem(other.getItems().get(i));
     }
+    other.clear();
   }
 }

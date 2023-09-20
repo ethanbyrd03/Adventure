@@ -8,7 +8,7 @@ public class MapImpl implements Map {
   private int width;
 
   public MapImpl(int width, int height, int numItems) {
-    if (width < 0 | height < 0) {
+    if (width <= 0 | height <= 0) {
       throw new IllegalArgumentException();
     }
     this.numItems = numItems;

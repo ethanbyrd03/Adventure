@@ -8,6 +8,9 @@ public class GameImpl implements Game {
   private Map map;
 
   public GameImpl(Map map, Player player) {
+    if (map == null | player == null) {
+      throw new IllegalArgumentException();
+    }
     this.player = player;
     this.map = map;
   }
@@ -40,7 +43,7 @@ public class GameImpl implements Game {
     System.out.println("Location: " + this.map.getCell(this.player.getPosition()).getName());
     System.out.println(this.map.getCell(this.player.getPosition()).getDescription());
     if (this.map.getCell(this.player.getPosition()).getIsVisited()) {
-      System.out.println("You have already visited this location");
+      System.out.println("You have already visited this location.");
     }
     if (this.map.getCell(this.player.getPosition()).hasChest()) {
       System.out.println("You found a chest! Type 'open' to see what's inside, or keep moving.");
@@ -57,7 +60,7 @@ public class GameImpl implements Game {
         System.out.println("The chest is empty.");
       } else {
         System.out.println(
-            "You collected these items:"
+            "You collected these items: "
                 + this.map.getCell(this.player.getPosition()).getChest().getItems());
         this.player
             .getInventory()
